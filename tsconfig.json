@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,//TypeScript 编译器选项 (https://cn.vitejs.dev/guide/features.html#typescript)
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,//TypeScript 编译器选项 (https://cn.vitejs.dev/guide/features.html#typescript)
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,//启用它会阻止Typescript对整个导入的库进行类型检查。相反，Typescript只会针对这些类型对您使用的代码进行类型检查。这意味着只要您不使用导入库的不兼容部分，它们就可以正常编译。
+    "noEmit": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
