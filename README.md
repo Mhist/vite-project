@@ -396,6 +396,10 @@ console.log(map.get('count').value)
 
 # 第四章、计算属性
 
+[计算属性-componentC](https://github.com/Mhist/vite-project/blob/master/src/components/ComponentC.vue)
+
+## 1.缓存
+
 1.`computed()` 方法期望接收一个 getter 函数，返回值为一个**计算属性 ref**。和其他一般的 ref 类似，你可以通过 `publishedBooksMessage.value` 访问计算结果。计算属性 ref 也会在模板中自动解包，因此在模板表达式中引用时无需添加 `.value`。
 
 ```vue
@@ -439,5 +443,98 @@ const publishedBooksMessage = computed<string>(calculateBooksMessage)
 
 ```
 
+若我们将同样的函数定义为一个方法而不是计算属性，两种方式在结果上确实是完全相同的，然而，不同之处在于**计算属性值会基于其响应式依赖被缓存**。一个计算属性仅会在其响应式依赖更新时才重新计算。这意味着只要 `author.books` 不改变，无论多少次访问 `publishedBooksMessage` 都会立即返回先前的计算结果，而不用重复执行 getter 函数。
 
+计算属性有更新的和不更新的、更新的是因为它有响应式依赖、而像
+
+```tsx
+const now = computed(() => Date.now())
+```
+
+不依赖其他响应式选项、所以不会更新。
+
+
+
+## 2.可写的计算属性
+
+计算属性默认是只读的。当你尝试修改一个计算属性时，你会收到一个运行时警告。只在某些特殊场景中你可能才需要用到“可写”的属性，你可以通过同时提供 getter 和 setter 来创建：
+
+```vue
+<script lang="ts">
+import { reactive,ref } from '@vue/reactivity'
+import { computed } from '@vue/runtime-core'
+export default {
+	name: 'ComponentC',
+}
+</script>
+<script setup lang="ts">
+const author = reactive({
+  name:"作者计算属性",
+  books:[
+    'vue2-Advanced Guide',
+    'vue3-Basic Guide',
+    'Vue4-The Mystery'
+  ]
+})
+// 组件中
+function calculateBooksMessage() {
+  return author.books.length > 0 ? 'Yes' : 'No'
+}
+const publishedBooksMessage = computed<string>(calculateBooksMessage)
+const now = computed(() => Date.now())
+
+
+// 可写的计算属性
+const firstName = ref('John')
+const lastName = ref('Doe')
+
+const fullName = computed({
+  // getter
+  get() {
+    return firstName.value + ' ' + lastName.value
+  },
+  // setter
+  set(newValue:string) {
+    // 注意：我们这里使用的是解构赋值语法
+    [firstName.value, lastName.value] = newValue.split(' ')
+  }
+})
+fullName.value = '江 武汉'
+let a:Array<string> = fullName.value.split(' ')
+console.log(a)
+console.log(firstName.value,lastName.value)
+
+</script>
+
+<template>
+  <div>
+  <p>Has published books</p>
+  <span>{{author.books.length > 0 ?'Yes':'No'}}</span><br/>
+  <span>{{publishedBooksMessage}}</span><br/>
+  <span>{{now}}</span>
+    
+  </div>
+</template>
+
+<style scoped>
+
+</style>
+
+```
+
+
+
+### Getter 不应有副作用[#](https://cn.vuejs.org/guide/essentials/computed.html#getters-should-be-side-effect-free)
+
+计算属性的 getter 应只做计算而没有任何其他的副作用，这一点非常重要，请务必牢记。举例来说，**不要在 getter 中做异步请求或者更改 DOM**！一个计算属性的声明中描述的是如何根据其他值派生一个值。因此 getter 的职责应该仅为计算和返回该值。在之后的指引中我们会讨论如何使用[监听器](https://cn.vuejs.org/guide/essentials/watchers.html)根据其他响应式状态的变更来创建副作用。
+
+### 避免直接修改计算属性值[#](https://cn.vuejs.org/guide/essentials/computed.html#avoid-mutating-computed-value)
+
+从计算属性返回的值是派生状态。可以把它看作是一个“临时快照”，每当源状态发生变化时，就会创建一个新的快照。更改快照是没有意义的，因此计算属性的返回值应该被视为只读的，并且永远不应该被更改——应该更新它所依赖的源状态以触发新的计算。
+
+
+
+# 第五章、类与样式绑定
+
+[类与样式绑定-componentD](https://github.com/Mhist/vite-project/blob/master/src/components/ComponentD.vue)
 
