@@ -538,3 +538,52 @@ console.log(firstName.value,lastName.value)
 
 [类与样式绑定-componentD](https://github.com/Mhist/vite-project/blob/master/src/components/ComponentD.vue)
 
+
+
+# 第六章、条件渲染
+
+[条件渲染-componentE](https://github.com/Mhist/vite-project/blob/master/src/components/ComponentE.vue)
+
+
+
+# 第七章、列表渲染
+
+[列表渲染-componentF](https://github.com/Mhist/vite-project/blob/master/src/components/ComponentF.vue)
+
+
+
+# 第八章、事件处理
+
+[事件处理-componentG](https://github.com/Mhist/vite-project/blob/master/src/components/ComponentG.vue)
+
+
+
+# 第九章、表单输入绑定
+
+[表单输入绑定-componentH](https://github.com/Mhist/vite-project/blob/master/src/components/ComponentH.vue)
+
+
+
+# 第十章、生命周期
+
+[生命周期-componentI](https://github.com/Mhist/vite-project/blob/master/src/components/ComponentI.vue)
+
+
+
+
+
+# 第十一章、侦听器
+
+[侦听器-componentJ](https://github.com/Mhist/vite-project/blob/master/src/components/ComponentJ.vue)
+
+
+
+# 第十二章、模板引用
+
+[模板引用-componentK](https://github.com/Mhist/vite-project/blob/master/src/components/ComponentK.vue)
+
+
+
+# 第十三章、组件基础
+
+[组件基础-componentL](https://github.com/Mhist/vite-project/blob/master/src/components/ComponentL.vue)

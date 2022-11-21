@@ -1,11 +1,6 @@
-<script lang="ts">
+<script setup lang="ts">
 import { reactive,ref } from '@vue/reactivity'
 import { computed } from '@vue/runtime-core'
-export default {
-	name: 'ComponentC',
-}
-</script>
-<script setup lang="ts">
 const author = reactive({
   name:"作者计算属性",
   books:[

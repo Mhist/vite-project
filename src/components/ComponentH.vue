@@ -6,7 +6,7 @@ import { computed } from '@vue/runtime-core'
 
 <template>
   <div>
-  第五章、类的动态绑定
+  第九章、表单输入绑定
     
   </div>
 </template>

@@ -1,8 +1,3 @@
-<script lang="ts">
-export default {
-	name: 'ComponentA',
-}
-</script>
 <script setup lang="ts">
 import {ref} from 'vue'
 const rawHtml: string =

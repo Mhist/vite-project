@@ -1,8 +1,4 @@
-<script lang="ts">
-export default {
-  name: "ComponentB",
-};
-</script>
+
 <script setup lang="ts">
 import { reactive, Ref } from "vue";
 import { nextTick } from "vue";
